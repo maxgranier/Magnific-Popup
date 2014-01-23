@@ -180,6 +180,8 @@ $.magnificPopup.registerModule('image', {
 						item.hasSize = true;
 						item.loaded = true;
 						item.loadError = true;
+
+						_mfpTrigger('ImageLoadFailed', item);
 					}
 				},
 				imgSt = mfp.st.image;
