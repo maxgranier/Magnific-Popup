@@ -20,20 +20,18 @@ $.magnificPopup.registerModule('image', {
 	options: {
 		markup: '<div class="mfp-figure">'+
 					'<div class="mfp-close"></div>'+
-					'<figure>'+
-						'<div class="mfp-img"></div>'+
-						'<figcaption>'+
-							'<div class="mfp-bottom-bar">'+
-								'<div class="mfp-title"></div>'+
-								'<div class="mfp-counter"></div>'+
-							'</div>'+
-						'</figcaption>'+
-					'</figure>'+
+					'<div class="mfp-img"></div>'+
+					'<div class="mfp-bottom-bar">'+
+						'<div class="mfp-title"></div>'+
+						'<div class="mfp-counter"></div>'+
+					'</div>'+
 				'</div>',
 		cursor: 'mfp-zoom-out-cur',
 		titleSrc: 'title', 
 		verticalFit: true,
-		tError: '<a href="%url%">The image</a> could not be loaded.'
+		tError: '<a href="%url%">The image</a> could not be loaded.',
+		bottomBarHeight: 0,
+		wrapPadding: 0
 	},
 
 	proto: {
@@ -71,7 +69,10 @@ $.magnificPopup.registerModule('image', {
 				if(mfp.isLowIE) {
 					decr = parseInt(item.img.css('padding-top'), 10) + parseInt(item.img.css('padding-bottom'),10);
 				}
-				item.img.css('max-height', mfp.wH-decr);
+				
+				// If image has "polaroid" like style layout with border padding (wrapPadding var) & bottom caption (bottomBarHeight var) and if options are filled, we are resizing image according to these values
+
+				item.img.css('max-height', mfp.wH - imgSt.bottomBarHeight - imgSt.wrapPadding - decr);
 			}
 		},
 		_onImageHasSize: function(item) {
