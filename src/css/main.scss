@@ -41,6 +41,7 @@ $z-index-base:                    1040 !default; // Base z-index of popup
 $include-arrows:                  true !default; // include styles for nav arrows
 $controls-opacity:                0.65 !default;
 $controls-color:                  #FFF !default;
+$controls-border-color:           #3F3F3F !default;
 $inner-close-icon-color:          #333 !default;
 $controls-text-color:             #CCC !default; // Color of preloader and "1 of X" indicator
 $controls-text-color-hover:       #FFF !default;
@@ -283,6 +284,9 @@ button {
   text-decoration: none;
   text-align: center;
   opacity: $controls-opacity;
+  @if $IE7support {
+    filter: unquote("alpha(opacity=#{$controls-opacity*100})");
+  }
   padding: 0 0 18px 10px;
   color: $controls-color;
 
@@ -293,6 +297,9 @@ button {
   &:hover,
   &:focus {
     opacity: 1;
+    @if $IE7support {
+      filter: unquote("alpha(opacity=#{1*100})");
+    }
   }
 
   &:active {
@@ -330,6 +337,9 @@ button {
   .mfp-arrow {
     position: absolute;
     opacity: $controls-opacity;
+    @if $IE7support {
+      filter: unquote("alpha(opacity=#{$controls-opacity*100})");
+    }
     margin: 0;
     top: 50%;
     margin-top: -55px;
@@ -343,6 +353,9 @@ button {
     &:hover,
     &:focus {
       opacity: 1;
+      @if $IE7support {
+        filter: unquote("alpha(opacity=#{1*100})");
+      }
     }
     &:before,
     &:after,
@@ -372,6 +385,7 @@ button {
     .mfp-b {
       border-top-width: 21px;
       border-bottom-width: 21px;
+      opacity: 0.7;
     }
 
   }
@@ -381,13 +395,13 @@ button {
 
     &:after,
     .mfp-a {
-      border-right: 17px solid #FFF;
+      border-right: 17px solid $controls-color;
       margin-left: 31px;
     }
     &:before,
     .mfp-b {
       margin-left: 25px;
-      border-right: 27px solid #3f3f3f;
+      border-right: 27px solid $controls-border-color; 
     }
   }
 
@@ -395,12 +409,12 @@ button {
     right: 0;
     &:after,
     .mfp-a {
-      border-left: 17px solid #FFF;
+      border-left: 17px solid $controls-color;
       margin-left: 39px
     }
     &:before,
     .mfp-b {
-      border-left: 27px solid #3f3f3f;
+      border-left: 27px solid $controls-border-color;
     }
   }
 }
@@ -483,6 +497,9 @@ button {
       font-size: 12px;
       line-height: 14px;
     }
+    figure {
+      margin: 0;
+    }
   }
   .mfp-bottom-bar {
     margin-top: -$image-padding-bottom + 4;
@@ -531,7 +548,7 @@ button {
           }
         }
         .mfp-figure {
-          /* The shadow behind the image */
+          // The shadow behind the image
           &:after {
             top: 0;
             bottom: 0;
