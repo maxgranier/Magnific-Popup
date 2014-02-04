@@ -29,9 +29,7 @@ $.magnificPopup.registerModule('image', {
 		cursor: 'mfp-zoom-out-cur',
 		titleSrc: 'title', 
 		verticalFit: true,
-		tError: '<a href="%url%">The image</a> could not be loaded.',
-		bottomBarHeight: 0,
-		wrapPadding: 0
+		tError: '<a href="%url%">The image</a> could not be loaded.'
 	},
 
 	proto: {
@@ -69,10 +67,8 @@ $.magnificPopup.registerModule('image', {
 				if(mfp.isLowIE) {
 					decr = parseInt(item.img.css('padding-top'), 10) + parseInt(item.img.css('padding-bottom'),10);
 				}
-				
-				// If image has "polaroid" like style layout with border padding (wrapPadding var) & bottom caption (bottomBarHeight var) and if options are filled, we are resizing image according to these values
 
-				item.img.css('max-height', mfp.wH - imgSt.bottomBarHeight - imgSt.wrapPadding - decr);
+				item.img.css('max-height', mfp.wH - decr);
 			}
 		},
 		_onImageHasSize: function(item) {
